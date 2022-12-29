@@ -1,0 +1,15 @@
+{% extends 'ejemplo/base_vino.html' %}
+{% block titulo%} Alta de nuevo Vino {% endblock %}
+{% block contenido %}
+  
+  <form action="/mis-vinos/alta" method="post">
+    {% csrf_token %}
+    {{ form.as_p}}
+    <input type="submit" value="Guardar">
+  </form>
+
+  <h2 style="color:rgb(2, 0, 128)">{{msg_exito}}</h2>
+
+  
+
+{% endblock %}

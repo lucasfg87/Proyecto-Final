@@ -1,0 +1,16 @@
+{% extends 'ejemplo/base_vino.html' %}
+{% block titulo%} Buscar Vinos por marca {% endblock %}
+{% block contenido %}
+  
+  <form action="/mis-vinos/buscar" method="post">
+    {% csrf_token %}
+    {{ form }}
+    <input type="submit" value="Buscar">
+  </form>
+
+  {% for vinos in lista_vinos %}
+      <ul>
+          <li> Id: {{vinos.id}}, Marca: {{vinos.marca}}, Provincia: {{vinos.provincia}}, Año: {{vinos.año}}</li>
+      </ul>
+  {% endfor %}
+{% endblock %}

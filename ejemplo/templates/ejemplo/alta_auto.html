@@ -1,0 +1,13 @@
+{% extends 'ejemplo/base_auto.html' %}
+{% block titulo%} Alta de nuevo Auto {% endblock %}
+{% block contenido %}
+  
+  <form action="/mis-autos/alta" method="post">
+    {% csrf_token %}
+    {{ form }}
+    <input type="submit" value="Agregar">
+  </form>
+
+  <h2 style="color:green">{{msg_exito}}</h2>
+
+{% endblock %}
