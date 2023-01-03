@@ -4,6 +4,7 @@ from ejemplo.forms import Buscar, FamiliarForm
 from ejemplo.forms_autos import Buscar, AutoForm
 from ejemplo.forms_vinos import Buscar, VinoForm
 from django.views import View 
+from django.views.generic import DetailView ,ListView , CreateView , DeleteView , UpdateView 
 
 def index(request):
     return render(request, "ejemplo/saludar.html")
@@ -186,3 +187,25 @@ class Altavinos(View):
                                                         'msg_exito': msg_exito})
         
         return render(request, self.template_name, {"form": form})
+
+###################Ultima Guia ##################
+
+class FamiliarList(ListView):
+  model = Familiar
+
+class FamiliarDetalle(DetailView):
+  model = Familiar
+
+class FamiliarCrear(CreateView):
+  model = Familiar
+  success_url = "/panel-familia"
+  fields = ["nombre", "direccion", "numero_pasaporte"]
+
+class FamiliarBorrar(DeleteView):
+  model = Familiar
+  success_url = "/panel-familia"
+
+class FamiliarActualizar(UpdateView):
+  model = Familiar
+  success_url = "/panel-familia"
+  fields = ["nombre", "direccion", "numero_pasaporte"]
