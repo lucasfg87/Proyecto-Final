@@ -19,6 +19,8 @@ from ejemplo.views import (index , saludar_a , monstrar_familiares , BuscarFamil
                            Altavinos , BuscarVinos , monstrar_vinos , 
                            FamiliarList , FamiliarDetalle , FamiliarCrear ,FamiliarBorrar , FamiliarActualizar)
 
+from ejemplo_dos.views import index
+
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('saludar/', index),
@@ -39,4 +41,5 @@ urlpatterns = [
     path('panel-familia/crear', FamiliarCrear.as_view()),
     path('panel-familia/<int:pk>/borrar', FamiliarBorrar.as_view()),
     path('panel-familia/<int:pk>/actualizar', FamiliarActualizar.as_view()),
+    path('ejemplo-dos/', index)
     ]
