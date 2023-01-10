@@ -1,11 +1,20 @@
 from django.shortcuts import render
-from django.views.generic import ListView , CreateView 
-from ejemplo_dos.models import Post
+from django.views.generic import ListView , CreateView , UpdateView , DeleteView , DetailView
+from django.contrib.auth.views import LoginView, LogoutView
+from django.contrib.auth.mixins import LoginRequiredMixin
+from ejemplo_dos.models import Post ,  Avatar , Mensaje
+from ejemplo_dos.forms import UsuarioForm
+from django.urls import reverse_lazy
+from django.contrib.auth.models import User
 
-def index (request):
-    return render(request,"ejemplo_dos/index.html",{})
+def index(request):
+    posts = Post.objects.order_by('-publicado_el').all()
+    return render(request, "ejemplo_dos/index.html", {"posts": posts})
 
-class PostList(ListView):
+class PostDetalle(DetailView):
+    model = Post
+
+class PostList(LoginRequiredMixin, ListView):
     model = Post
  
 class PostCrear (CreateView):
@@ -13,3 +22,50 @@ class PostCrear (CreateView):
     success_url = "/ejemplo-dos/listar"
     fields = '__all__'
 
+class PostBorrar(LoginRequiredMixin, DeleteView):
+    model = Post
+    success_url = reverse_lazy("ejemplo-dos-listar")
+
+class PostActualizar(LoginRequiredMixin, UpdateView):
+    model = Post
+    success_url = reverse_lazy("ejemplo-dos-listar")
+    fields = "__all__"
+
+class UserSignUp(CreateView):
+    form_class = UsuarioForm
+    template_name = 'registration/signup.html'
+    success_url = "/ejemplo-dos/listar"
+
+class UserLogin(LoginView):
+    next_page = "ejemplo-dos-index"
+
+class UserLogout(LogoutView):
+    next_page = "ejemplo-dos-index"
+
+class AvatarActualizar(UpdateView):
+    model = Avatar
+    fields = ['imagen']
+    success_url = "/ejemplo-dos/listar"
+
+class UserActualizar(UpdateView):
+    model = User
+    fields = ['first_name', 'last_name', 'email']
+    success_url = reverse_lazy('ejemplo-dos-listar')
+
+# Mendajes 
+
+
+class MensajeDetalle(LoginRequiredMixin, DetailView):
+    model = Mensaje
+
+class MensajeListar(LoginRequiredMixin, ListView):
+    model = Mensaje  
+
+class MensajeCrear(CreateView):
+    model = Mensaje
+    success_url = reverse_lazy("ejemplo-dos-mensajes-crear")
+    fields = ['nombre', 'email', 'texto']
+
+class MensajeBorrar(LoginRequiredMixin, DeleteView):
+    model = Mensaje
+    success_url = reverse_lazy("ejemplo-dos-mensajes-listar")
