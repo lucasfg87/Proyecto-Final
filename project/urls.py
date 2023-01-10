@@ -21,7 +21,7 @@ from ejemplo.views import (index , saludar_a , monstrar_familiares , BuscarFamil
                            Altavinos , BuscarVinos , monstrar_vinos , 
                            FamiliarList , FamiliarDetalle , FamiliarCrear ,FamiliarBorrar , FamiliarActualizar)
 
-from ejemplo_dos.views import index , PostDetalle ,PostList ,PostCrear , PostBorrar, PostActualizar, UserSignUp , UserLogin , UserLogout , AvatarActualizar , UserActualizar ,  MensajeCrear, MensajeListar, MensajeDetalle, MensajeBorrar
+from argentina.views import index , PostDetalle ,PostList ,PostCrear , PostBorrar, PostActualizar, UserSignUp , UserLogin , UserLogout , AvatarActualizar , UserActualizar ,  MensajeCrear, MensajeListar, MensajeDetalle, MensajeBorrar , AboutListar 
 
 from django.contrib.admin.views.decorators import staff_member_required
 
@@ -45,21 +45,23 @@ urlpatterns = [
     path('panel-familia/crear', FamiliarCrear.as_view()),
     path('panel-familia/<int:pk>/borrar', FamiliarBorrar.as_view()),
     path('panel-familia/<int:pk>/actualizar', FamiliarActualizar.as_view()),
-    path('ejemplo-dos/', index, name="ejemplo-dos-index"),
-    path('ejemplo-dos/<int:pk>/detalle/', PostDetalle.as_view(), name="ejemplo-dos-detalle"),
-    path('ejemplo-dos/listar/',PostList.as_view(), name="ejemplo-dos-listar"),
-    path('ejemplo-dos/crear/', PostCrear.as_view(), name="ejemplo-dos-crear"),
-    path('ejemplo-dos/<int:pk>/borrar/', staff_member_required(PostBorrar.as_view()), name="ejemplo-dos-borrar"),
-    path('ejemplo-dos/<int:pk>/actualizar/', staff_member_required(PostActualizar.as_view()), name="ejemplo-dos-actualizar"),
-    path('ejemplo-dos/signup/', UserSignUp.as_view(), name = "ejemplo-dos-signup"),
-    path('ejemplo-dos/login/', UserLogin.as_view(), name= "ejemplo-dos-login"),
-    path('ejemplo-dos/logout/', UserLogout.as_view(), name="ejemplo-dos-logout"),
-    path('ejemplo-dos/avatars/<int:pk>/actualizar/', AvatarActualizar.as_view(), name="ejemplo-dos-avatars-actualizar"),
-    path('ejemplo-dos/users/<int:pk>/actualizar/', UserActualizar.as_view(), name="ejemplo-dos-users-actualizar"),
-    path('ejemplo-dos/mensajes/crear/', MensajeCrear.as_view(), name="ejemplo-dos-mensajes-crear"),
-    path('ejemplo-dos/mensajes/<int:pk>/detalle/', MensajeDetalle.as_view(), name="ejemplo-dos-mensajes-detalle"),
-    path('ejemplo-dos/mensajes/listar/', MensajeListar.as_view(), name="ejemplo-dos-mensajes-listar"),
-    path('ejemplo-dos/mensajes/<int:pk>/borrar/', MensajeBorrar.as_view(), name="ejemplo-dos-mensajes-borrar"),
+    path('argentina/', index, name="argentina-index"),
+    path('argentina/<int:pk>/detalle/', PostDetalle.as_view(), name="argentina-detalle"),
+    path('argentina/listar/',PostList.as_view(), name="argentina-listar"),
+    path('argentina/crear/', PostCrear.as_view(), name="argentina-crear"),
+    path('argentina/<int:pk>/borrar/', staff_member_required(PostBorrar.as_view()), name="argentina-borrar"),
+    path('argentina/<int:pk>/actualizar/', staff_member_required(PostActualizar.as_view()), name="argentina-actualizar"),
+    path('argentina/signup/', UserSignUp.as_view(), name = "argentina-signup"),
+    path('argentina/login/', UserLogin.as_view(), name= "argentina-login"),
+    path('argentina/logout/', UserLogout.as_view(), name="argentina-logout"),
+    path('argentina/avatars/<int:pk>/actualizar/', AvatarActualizar.as_view(), name="argentina-avatars-actualizar"),
+    path('argentina/users/<int:pk>/actualizar/', UserActualizar.as_view(), name="argentina-users-actualizar"),
+    path('argentina/mensajes/crear/', MensajeCrear.as_view(), name="argentina-mensajes-crear"),
+    path('argentina/mensajes/<int:pk>/detalle/', MensajeDetalle.as_view(), name="argentina-mensajes-detalle"),
+    path('argentina/mensajes/listar/', MensajeListar.as_view(), name="argentina-mensajes-listar"),
+    path('argentina/mensajes/<int:pk>/borrar/', MensajeBorrar.as_view(), name="argentina-mensajes-borrar"),
+    path('argentina/about/', AboutListar.as_view(), name= "argentina-about"),
     ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+

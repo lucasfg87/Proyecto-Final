@@ -1,0 +1,16 @@
+{% extends 'argentina/base.html' %}
+
+{% block contenido %}
+<ul>
+{% for mensaje in object_list %}
+    <li>
+        {{mensaje.enviado_el}} - - {{mensaje.email}} -- {{mensaje.nombre}} 
+        {% if user.is_superuser %}
+        <a href="{% url 'argentina-mensajes-borrar' mensaje.id %}">borrar</a>
+        {% endif %}
+        <a href="{% url 'argentina-mensajes-detalle' mensaje.id %}">Ver</a>
+               
+    </li>
+{% endfor %}
+</ul>
+{% endblock %}
